@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  title: JobsApi05122022
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobsapi-051222.azurewebsites.net/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - auth
+      summary: Production register route
+      operationId: Productionregisterroute
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProductionregisterrouteRequest'
+              - example:
+                  name: User1
+                  email: User1@gmail.com
+                  password: '123456'
+            example:
+              name: User1
+              email: User1@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - auth
+      summary: Production login route
+      operationId: Productionloginroute
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProductionloginrouteRequest'
+              - example:
+                  email: User1@gmail.com
+                  password: '123456'
+            example:
+              email: User1@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    get:
+      tags:
+      - jobs
+      summary: Production Get all Jobs
+      operationId: ProductionGetallJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - jobs
+      summary: Production Create Job
+      operationId: ProductionCreateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProductionCreateJobRequest'
+              - example:
+                  company: Google
+                  position: Marketing Head
+            example:
+              company: Google
+              position: Marketing Head
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - jobs
+      summary: Get Single Job
+      operationId: GetSingleJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - jobs
+      summary: Prod Update Job
+      operationId: ProdUpdateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ProdUpdateJobRequest'
+              - example:
+                  position: Sales Marketing
+            example:
+              position: Sales Marketing
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - jobs
+      summary: Production Delete Job
+      operationId: ProductionDeleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    ProductionregisterrouteRequest:
+      title: ProductionregisterrouteRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: User1
+        email: User1@gmail.com
+        password: '123456'
+    ProductionloginrouteRequest:
+      title: ProductionloginrouteRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: User1@gmail.com
+        password: '123456'
+    ProductionCreateJobRequest:
+      title: ProductionCreateJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Google
+        position: Marketing Head
+    ProdUpdateJobRequest:
+      title: ProdUpdateJobRequest
+      required:
+      - position
+      type: object
+      properties:
+        position:
+          type: string
+      example:
+        position: Sales Marketing
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security:
+- bearer: []
+tags:
+- name: auth
+  description: ''
+- name: jobs
+  description: ''
