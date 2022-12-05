@@ -8,9 +8,10 @@ const auth=(req,res,next)=>{
         throw new UnauthenticatedError("Authentication invalid");
     }
 
-    const token=autheaders.split(' ')[1];
+
 
     try {
+        const token=autheaders.split(' ')[1];
         const payload=jwt.verify(token,process.env.JWT_SECRET)
         //attach user to job route
         req.user={userId:payload.userId,name:payload.name};
